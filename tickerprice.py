@@ -7,8 +7,8 @@ import datetime
 
 parser = argparse.ArgumentParser(description="Get current stock price from yahoo finance.", prog=('Ticker Price Fetcher'))
 
-parser.add_argument("ticker", type=str)
-parser.add_argument("loop", default=60, type=int)
+parser.add_argument("ticker", type=str, help='Ticker to look up on yahoo finance.')
+parser.add_argument("-loop", default=60, type=int, help='set refresh rate for ticker price in seconds (default: 60 seconds)')
 
 args = parser.parse_args()
 
@@ -34,7 +34,7 @@ try:
 
         try:
             last_change = round(((current_price-prices[-2])/prices[-2])*100, 2)
-            print(f'{time_taken} - {ticker} @ ${current_price} **** {last_change}%')
+            print(f'{time_taken} - {ticker} @ ${current_price} - moved {last_change}%')
         except IndexError:
             print(f'{time_taken} - {ticker} @ ${current_price}')
 
